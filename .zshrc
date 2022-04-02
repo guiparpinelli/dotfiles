@@ -25,7 +25,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Emacs
 alias em="/opt/homebrew/bin/emacs -nw"
-alias emacs="emacsclient -c -n -a ''"
+alias emacs="emacsclient -c -a 'emacs'"
+alias killemacs="emacsclient -e '(kill-emacs)'"
 
 # Changing "ls" to "exa"
 alias la='exa -al --color=always --group-directories-first' # my preferred listing
