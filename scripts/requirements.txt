@@ -1,0 +1,10 @@
+pip
+black
+organize-tool
+pygments
+pynvim
+ipython
+afew
+rss2email
+pyright
+isort
