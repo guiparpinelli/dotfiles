@@ -230,6 +230,12 @@
         deft-use-filter-string-for-filename t
         deft-file-naming-rules '((nospace . "-"))))
 
+(use-package! poetry
+  :defer t
+  :hook (python-mode . poetry-tracking-mode)
+  :config
+  (setq poetry-tracking-strategy 'projectile))
+
 (use-package! py-isort
   :defer t
   :after python-mode
@@ -254,5 +260,5 @@
   :hook (org-mode . org-superstar-mode)
   :custom
   (setq
-    org-superstar-remove-leading-stars t
-    org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))
+   org-superstar-remove-leading-stars t
+   org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))

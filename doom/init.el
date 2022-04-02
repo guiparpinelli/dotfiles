@@ -86,6 +86,7 @@
         +pandoc)
        (python
         +pyenv
+        +poetry
         +lsp
         +pyright)
        rest
