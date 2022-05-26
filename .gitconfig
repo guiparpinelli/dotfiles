@@ -1,0 +1,58 @@
+[user]
+    name = Guilherme Parpinelli
+    email = guilheerme.p@gmail.com
+[core]
+    excludesfile = ~/.gitignore_global
+    whitespace = trailing-space,space-before-tab
+    pager = delta
+[push]
+    default = current
+    followTags = true
+[alias]
+    ua = reset HEAD # Unadd a given <file>
+    uc = reset --soft HEAD^ # Undo last commit
+    ec = config --global -e # Edit gitconfig
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate # List commits in short form, with colors and branch/tag annotations.
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat # List commits showing changed files
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short # List oneline commits showing dates
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative # List oneline commits showing relative dates
+    le = log --oneline --decorate # Default look for short git log
+    logtree = "log --graph --oneline --decorate --all" # Same as above, but with graph
+    filelog = log -u # See all the commits related to a file, with the diff of the changes with git log -u
+    la = "!git config -l | grep alias | cut -c 7-" # List all aliases
+    last = log -1 HEAD
+[grep]
+    extendRegexp = true
+    lineNumber = true
+[interactive]
+    diffFilter = delta --color-only
+[stash]
+    showPatch = true
+[log]
+    decorate = full
+[merge]
+    conflictstyle = diff3
+    stat = true
+[diff]
+    colorMoved = default
+[status]
+    showUntrackedFiles = all
+[commit]
+    verbose = true
+    template = ~/.gittemplates/commit
+[github]
+    user = guiparpinelli
+[delta]
+  navigate = true
+  side-by-side = true
+  line-numbers = true
+[flake8]
+    strict = true
+[init]
+    templatedir = ~/.gittemplates
+    defaultBranch = main
+[url "https://github.com/"]
+    insteadOf = gh:
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+
