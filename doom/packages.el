@@ -52,3 +52,4 @@
 (package! python-pytest)
 (package! py-isort)
 (package! prettier)
+(package! yasnippet-snippets)

@@ -138,7 +138,7 @@
        ;;fsharp            ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
-       ;;(go +lsp)         ; the hipster dialect
+       (go +lsp)         ; the hipster dialect
        ;;(graphql +lsp)    ; Give queries a REST
        ;;(haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
@@ -164,6 +164,7 @@
        ;;purescript        ; javascript, but functional
        (python
         +pyenv
+        +poetry
         +lsp
         +pyright)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
@@ -179,7 +180,7 @@
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
-       terra             ; Earth and Moon in alignment for performance.
+       ;;terra             ; Earth and Moon in alignment for performance.
        web               ; the tubes
        (yaml +lsp)              ; JSON, but readable
        ;;zig               ; C, but simpler

@@ -22,21 +22,19 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(setq doom-font (font-spec :family "Hack" :size 16)
+      doom-theme 'doom-monokai-pro
+      display-line-numbers t
+      display-line-numbers-type 'relative
+      default-directory "~/"
+      command-line-default-directory "~/"
+      projectile-project-search-path '("~/workspace" "~/go/src")
+      projectile-ignored-projects '("~/" "~/.emacs.d"))
+
 (display-time-mode 1)
 (display-battery-mode 1)
-(setq auth-sources '("~/.authinfo" "~/.authinfo.gpg" "~/.netrc"))
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-
-(setq
- doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'regular)
- doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
- doom-theme 'doom-one
- default-directory "~/"
- command-line-default-directory "~/"
- display-line-numbers t
- display-line-numbers-type 'relative
- projectile-project-search-path '("~/workspace/")
- projectile-ignored-projects '("~/" "/tmp" "~/.emacs.d/"))
+(toggle-frame-maximized)
+(setq-default enable-local-variables t)
 
 (after! doom-modeline
   :config
