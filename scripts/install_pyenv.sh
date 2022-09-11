@@ -6,7 +6,7 @@ set -euo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 PYTHON_REQUIREMENTS="$DIR/requirements.txt"
-PYTHON_VERSION=3.10.2
+PYTHON_VERSION=3.10.6
 
 # see github.com/pyenv/pyenv/issues/1219
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -18,8 +18,8 @@ if [ ! -d "$PYENV_DIR" ]; then
 	curl https://pyenv.run | bash
 	export PATH="$HOME/.pyenv/bin:$PATH"
 	pyenv install -s $PYTHON_VERSION
-	pyenv install -s 3.8.12
-	pyenv install -s 3.9.9
+	pyenv install -s 3.8.13
+	pyenv install -s 3.9.13
 	pyenv install -s 3.11-dev
 fi
 
