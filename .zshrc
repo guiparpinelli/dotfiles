@@ -3,7 +3,7 @@
 #
 
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
-export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
+export EDITOR="vim"                               # $EDITOR use Vim in terminal
 export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
 
 # Path to your oh-my-zsh installation.
@@ -26,7 +26,7 @@ source $ZSH/oh-my-zsh.sh
 # Emacs
 alias em="/opt/homebrew/bin/emacs -nw"
 alias emacs="emacsclient -c -a 'emacs'"
-alias killemacs="emacsclient -e '(kill-emacs)'"
+alias killemacs="emacsclient -e '(kill-emacs)' && brew services restart d12frosted/emacs-plus/emacs-plus@28"
 
 # Changing "ls" to "exa"
 alias la='exa -al --color=always --group-directories-first' # my preferred listing
@@ -76,3 +76,7 @@ alias .....="cd ../../../../"
 
 # pyenv
 eval "$(pyenv init -)"
+
+# go
+export GOPATH="$(go env GOPATH)"
+export PATH="$PATH:$GOPATH/bin"
