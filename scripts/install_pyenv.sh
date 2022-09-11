@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# from: https://github.com/benmezger/dotfiles
 
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. "$DIR/base.sh"
+. "$DIR/ansi"
 
 PYTHON_REQUIREMENTS="$DIR/requirements.txt"
 PYTHON_VERSION=3.10.6
@@ -26,5 +27,5 @@ fi
 eval "$(pyenv init -)"
 pyenv virtualenv --force $PYTHON_VERSION personal
 pyenv local personal
-pip install --upgrade -r $PYTHON_REQUIREMENTS
-mv $DIR/../.python-version $HOME
+pip install --upgrade -r "$PYTHON_REQUIREMENTS"
+mv "$DIR/../.python-version" "$HOME"
