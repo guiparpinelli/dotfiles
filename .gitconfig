@@ -24,8 +24,6 @@
 [grep]
     extendRegexp = true
     lineNumber = true
-[interactive]
-    diffFilter = delta --color-only
 [stash]
     showPatch = true
 [log]
@@ -33,21 +31,23 @@
 [merge]
     conflictstyle = diff3
     stat = true
-[diff]
-    colorMoved = default
 [status]
     showUntrackedFiles = all
+[diff]
+    colorMoved = default
 [commit]
     verbose = true
     template = ~/.gittemplates/commit
 [github]
     user = guiparpinelli
-[delta]
-  navigate = true
-  side-by-side = true
-  line-numbers = true
 [flake8]
     strict = true
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    line-numbers = true
+    side-by-side = true
 [init]
     templatedir = ~/.gittemplates
     defaultBranch = main
@@ -55,4 +55,3 @@
     insteadOf = gh:
 [url "https://gist.github.com/"]
     insteadOf = gist:
-

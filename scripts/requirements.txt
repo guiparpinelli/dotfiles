@@ -1,7 +1,10 @@
 pip
 black
-organize-tool
-pygments
-ipython
 pyright
+pyflakes
+pylint
+organize-tool
+ipython
+ipdb
 isort
+pytest
