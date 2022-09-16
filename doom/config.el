@@ -1,84 +1,87 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;; Some functionality uses this to identify you, e.g. GPG configuration, email
+;; clients, file templates and snippets. It is optional.
+(setq user-full-name "Guilherme Parpinelli"
+      user-mail-address "guilheerme.p@gmail.com")
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-;; Here are some additional functions/macros that will help you configure Doom.
 ;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
+;;; ui
+
+(setq doom-theme 'doom-dracula
+      doom-font (font-spec :family "JetBrains Mono" :size 14 :weight 'light)
+      display-line-numbers-type 'relative)
+
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+;;; :ui doom-dashboard
+(setq fancy-splash-image (concat doom-user-dir "splash.png"))
+;; Hide the menu for as minimalistic a startup screen as possible.
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+
 ;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
-;; etc).
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
+;;; Modules
 
-(setq doom-font (font-spec :family "Hack" :size 16)
-      doom-theme 'doom-monokai-pro
-      display-line-numbers t
-      display-line-numbers-type 'relative
-      default-directory "~/"
-      command-line-default-directory "~/"
-      projectile-project-search-path '("~/workspace" "~/go/src")
-      projectile-ignored-projects '("~/" "~/.emacs.d"))
+;;; :completion company
+;; IMO, modern editors have trained a bad habit into us all: a burning need for
+;; completion all the time -- as we type, as we breathe, as we pray to the
+;; ancient ones -- but how often do you *really* need that information? I say
+;; rarely. So opt for manual completion:
+(after! company
+  (setq company-idle-delay nil
+        company-selection-wrap-around t
+        company-minimum-prefix-length 1))
 
-(display-time-mode 1)
-(display-battery-mode 1)
-(toggle-frame-maximized)
-(setq-default enable-local-variables t)
+(after! company-lsp
+  (push 'company-lsp company-backends)
+  (setq company-lsp-async t)
+  (setq company-lsp-cache-candidates t)
+  (setq company-lsp-enable-recompletion t))
 
-(after! doom-modeline
-  :config
+;;; :editor evil
+;; Focus new window after splitting
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
 
-  (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
+;;; :tools lsp
+;; Disable invasive lsp-mode features
+(after! lsp-mode
+  (setq lsp-enable-symbol-highlighting nil
+        ;; If an LSP server isn't present when I start a prog-mode buffer, you
+        ;; don't need to tell me. I know. On some machines I don't care to have
+        ;; a whole development environment for some ecosystems.
+        lsp-enable-suggest-server-download nil))
+(after! lsp-ui
+  (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
+        lsp-ui-doc-enable nil))     ; redundant with K
 
-  (setq doom-modeline-icon (display-graphic-p))
-  (setq doom-modeline-major-mode-icon t)
-  (setq doom-modeline-major-mode-color-icon t)
+;;; :tools magit
+(setq magit-repository-directories '(("~/workspace" . 1) ("~/go/src" . 2))
+      magit-save-repository-buffers nil
+      ;; Don't restore the wconf after quitting magit, it's jarring
+      magit-inhibit-save-previous-winconf t
+      transient-values '((magit-rebase "--autosquash" "--autostash")
+                         (magit-pull "--rebase" "--autostash")
+                         (magit-revert "--autostash")))
 
-  (setq doom-modeline-buffer-state-icon t)
-  (setq doom-modeline-buffer-modification-icon t)
-
-  (setq doom-modeline-enable-word-count t)
-  (setq doom-modeline-buffer-encoding t)
-  (setq doom-modeline-indent-info t)
-
-  (setq doom-modeline-env-version t)
-  (setq doom-modeline-env-load-string "..."))
-
+;;; :lang org
 (after! org
   :config
-  (setq org-ellipsis " ▾"
-        org-hide-emphasis-markers t
-        org-src-fontify-natively t
-        org-fontify-quote-and-verse-blocks t
-        org-src-tab-acts-natively t
-        org-edit-src-content-indentation 2
-        org-hide-block-startup nil
-        org-src-preserve-indentation nil
-        org-startup-folded 'content
-        org-cycle-separator-lines 2))
+  (setq org-directory "~/org"
+        org-archive-location (concat org-directory ".archive/%s::")
+        org-agenda-files org-directory)
+        org-startup-folded 'show2levels
+        org-ellipsis " [...] ")
 
 (after! org-journal
   :defer t
   :config
-  (setq org-journal-dir "~/org/journal")
+  (setq org-journal-dir (concat org-directory "journal/"))
   (push org-journal-dir org-agenda-files)
-  (setq org-journal-enable-agenda-integration t)
-  (setq org-journal-file-format "%Y%m%d.org"))
+  (setq org-journal-enable-agenda-integration t
+        org-journal-file-format "%Y%m%d.org"))
 
 (after! deft
   :defer t
-  :config
+  :cofig
   (setq deft-directory "~/org"
         deft-extensions '("org" "md" "txt")
         deft-default-extension "org"
@@ -86,6 +89,19 @@
         deft-use-filename-as-title nil
         deft-use-filter-string-for-filename t
         deft-file-naming-rules '((nospace . "-"))))
+
+;; Implicit /g flag on evil ex substitution, because I use the default behavior
+;; less often.
+(setq evil-ex-substitute-global t)
+
+(after! flycheck
+  :config
+  (setq flycheck-check-syntax-automatically '(save mode-enable)))
+
+(after! projectile
+  :config
+  (setq projectile-project-search-path '("~/workspace" "~/go/src")
+        projectile-ignored-projects '("~/" "~/.emacs.d")))
 
 (use-package! py-isort
   :defer t
