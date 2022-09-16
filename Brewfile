@@ -28,6 +28,7 @@ brew "hugo"
 brew "imagemagick"
 brew "jq"
 brew "libffi"
+brew "libgccjit"
 brew "libmpc"
 brew "make", link: false
 brew "openssl@1.1"
