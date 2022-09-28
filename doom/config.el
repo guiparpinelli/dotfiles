@@ -10,7 +10,10 @@
       doom-font (font-spec :family "JetBrains Mono" :size 14 :weight 'light)
       display-line-numbers-type 'relative)
 
+;; Start Emacs fullscreen
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;; Prevents some cases of Emacs flickering.
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 ;;; :ui doom-dashboard
 (setq fancy-splash-image (concat doom-user-dir "splash.png"))
