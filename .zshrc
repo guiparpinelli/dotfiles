@@ -57,6 +57,7 @@ alias zprof="vim ~/.zprofile"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias gitcfg="vim ~/.gitconfig"
 alias dotfiles="cd ~/dotfiles"
+alias pshell="poetry shell"
 
 # IPython
 alias ipy="ipython"
@@ -76,6 +77,7 @@ alias .....="cd ../../../../"
 
 # pyenv
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # go
 export GOPATH="$(go env GOPATH)"
