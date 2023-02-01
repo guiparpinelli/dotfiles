@@ -1,5 +1,0 @@
-(package! company-lsp)
-(package! yasnippet-snippets)
-(package! python-pytest)
-(package! py-isort)
-(package! prettier)
