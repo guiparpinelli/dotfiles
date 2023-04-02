@@ -52,7 +52,7 @@ alias yta-wav="yt-dlp --extract-audio --audio-format wav "
 alias ytv-best="yt-dlp -f bestvideo+bestaudio "
 
 # Configs
-alias zshcfg="vim ~/.zshrc"
+alias zshrc="vim ~/.zshrc"
 alias zprof="vim ~/.zprofile"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias gitcfg="vim ~/.gitconfig"
