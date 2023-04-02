@@ -2,7 +2,7 @@ unset path
 PATH="\
 $HOME/.pyenv/bin:\
 $HOME/.cargo/bin:\
-$HOME/.emacs.d/bin:\
+$HOME/.config/emacs/bin:\
 $HOME/.local/bin:"
 
 # Append defaults
@@ -53,7 +53,7 @@ alias ytv-best="yt-dlp -f bestvideo+bestaudio "
 
 # Configs
 alias zshrc="vim ~/.zshrc"
-alias zprof="vim ~/.zprofile"
+alias zprof="vim ~/.zsh_profile"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias gitcfg="vim ~/.gitconfig"
 alias dotfiles="cd ~/dotfiles"
