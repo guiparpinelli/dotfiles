@@ -1,12 +1,9 @@
-# taps
 tap "d12frosted/emacs-plus"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 
-# brew install
 brew "aspell"
 brew "binutils"
-brew "chezmoi"
 brew "cmake"
 brew "cookiecutter"
 brew "coreutils", link: true
@@ -36,7 +33,6 @@ brew "pre-commit"
 brew "readline", link: true
 brew "ripgrep"
 brew "sqlite3"
-brew "terraform"
 brew "tmux"
 brew "tree"
 brew "wget"

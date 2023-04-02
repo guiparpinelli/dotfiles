@@ -69,16 +69,13 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+weather () {
+  curl "https://wttr.in/${1}"
+}
 
 # pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# go
-export GOPATH="$(go env GOPATH)"
-export PATH="$PATH:$GOPATH/bin"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

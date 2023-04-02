@@ -14,93 +14,174 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
-(doom! :completion
-       company           ; the ultimate code completion backend
-       ;;ivy               ; a search engine for love and life
+(doom! :input
+       ;;bidi             
+       ;;chinese
+       ;;japanese
+       ;;layout           
+
+       :completion
+       company          
+       ;;helm             
+       ;;ido              
+       ;;ivy              
        (vertico
-        +childframe)     ; the search engine of the future
+        +childframe)    
 
        :ui
-       ;;deft              ; notational velocity for Emacs
-       doom              ; what makes DOOM look the way it does
-       doom-dashboard    ; a nifty splash screen for Emacs
-       doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       modeline          ; snazzy, Atom-inspired modeline, plus API
-       nav-flash         ; blink cursor line after big motions
-       ophints           ; highlight the region an operation acts on
-       (popup +defaults) ; tame sudden yet inevitable temporary windows
-       treemacs          ; a project drawer, like neotree but cooler
+       ;;deft             
+       doom             
+       doom-dashboard   
+       doom-quit        
+       ;;(emoji +unicode) 
+       hl-todo          
+       ;;hydra
+       ;;indent-guides    
+       ;;ligatures        
+       ;;minimap          
+       modeline         
+       nav-flash        
+       ;;neotree          
+       ophints          
+       (popup +defaults)  
+       ;;tabs             
+       treemacs         
+       ;;unicode          
        (vc-gutter
-        +diffhl
-        +pretty)         ; vcs diff in the fringe
-       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       workspaces        ; tab emulation, persistence & separate workspaces
-       zen               ; distraction-free coding or writing
+         +diffhl
+         +pretty)
+       vi-tilde-fringe  
+       ;;window-select    
+       workspaces       
+       zen
 
        :editor
-       (evil +everywhere); come to the dark side, we have cookies
-       file-templates    ; auto-snippets for empty files
-       fold              ; (nigh) universal code folding
-       (format +onsave)  ; automated prettiness
-       multiple-cursors  ; editing in many places at once
-       rotate-text       ; cycle region at point between text candidates
-       snippets          ; my elves. They type so I don't have to
-       word-wrap         ; soft wrapping with language-aware indent
+       (evil +everywhere)
+       file-templates   
+       fold             
+       (format +onsave)
+       ;;god              
+       ;;lispy            
+       multiple-cursors
+       ;;objed            
+       ;;parinfer         
+       rotate-text
+       snippets         
+       word-wrap
 
        :emacs
-       dired             ; making dired pretty [functional]
-       electric          ; smarter, keyword-based electric-indent
-       ibuffer           ; interactive buffer management
-       (undo +tree)      ; persistent, smarter undo for your inevitable mistakes
-       vc                ; version-control and Emacs, sitting in a tree
+       dired            
+       electric         
+       ibuffer
+       (undo +tree)
+       vc               
 
        :term
-       vterm             ; the best terminal emulation in Emacs
+       ;;eshell           
+       ;;shell            
+       ;;term             
+       vterm
 
        :checkers
-       syntax              ; tasing you for every semicolon you forget
-       ;;(spell +flyspell) ; tasing you for misspelling mispelling
-       ;;grammar           ; tasing grammar mistake every you make
+       syntax             
+       ;;(spell +flyspell)
+       ;;grammar          
 
        :tools
-       debugger          ; FIXME stepping through code, to help you add bugs
+       ;;ansible
+       ;;biblio           
+       debugger
+       ;;direnv
        (docker +lsp)
-       editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
-       (eval +overlay)   ; run code, run (also, repls)
-       gist              ; interacting with github gists
-       lookup            ; navigate your code and its documentation
-       (lsp)             ; M-x vscode
-       magit             ; a git porcelain for Emacs
-       make              ; run make tasks from Emacs
-       pdf               ; pdf enhancements
-       rgb               ; creating color strings
-       ;;terraform         ; infrastructure as code
-       tree-sitter       ; syntax and parsing, sitting in a tree...
+       editorconfig
+       ;;ein              
+       (eval +overlay)    
+       gist
+       lookup             
+       (lsp)
+       (magit +forge)
+       make
+       ;;pass             
+       pdf
+       ;;prodigy          
+       rgb
+       ;;taskrunner       
+       ;;terraform        
+       ;;tmux             
+       tree-sitter
+       ;;upload           
 
        :os
-       (:if IS-MAC macos)  ; improve compatibility with macOS
-       tty               ; improve the terminal Emacs experience
+       (:if IS-MAC macos) 
+       tty
 
        :lang
-       ;;(cc +lsp)         ; C > C++ == 1
-       emacs-lisp        ; drown in parentheses
-       (go +lsp)         ; the hipster dialect
-       json              ; At least it ain't XML
-       javascript        ; all(hope(abandon(ye(who(enter(here))))))
-       markdown          ; writing docs for people to ignore
-       (org +pretty)     ; organize your plain life in plain text
+       ;;agda             
+       ;;beancount        
+       (cc +lsp)
+       ;;clojure          
+       ;;common-lisp      
+       ;;coq              
+       ;;crystal          
+       ;;csharp           
+       ;;data             
+       ;;(dart +flutter)  
+       ;;dhall
+       ;;elixir           
+       ;;elm              
+       emacs-lisp       
+       ;;erlang           
+       ;;ess              
+       ;;factor
+       ;;faust            
+       ;;fortran          
+       ;;fsharp           
+       ;;fstar            
+       ;;gdscript         
+       (go +lsp)
+       ;;(graphql +lsp)   
+       ;;(haskell +lsp)   
+       ;;hy               
+       ;;idris            
+       json
+       ;;(java +lsp)      
+       javascript
+       ;;julia            
+       ;;kotlin           
+       ;;latex            
+       ;;lean             
+       ;;ledger           
+       lua
+       markdown         
+       ;;nim              
+       ;;nix              
+       ;;ocaml            
+       (org +pretty)
+       ;;php              
+       ;;plantuml         
+       ;;purescript       
        (python
         +pyenv
         +lsp
         +pyright
-        +poetry)         ; beautiful is better than ugly
-       rest              ; Emacs as a REST client
-       (rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-       (sh +lsp)         ; she sells {ba,z,fi}sh shells on the C xor
-       (web +lsp)        ; the tubes
-       (yaml +lsp)       ; JSON, but readable
+        +poetry)
+       ;;qt
+       ;;racket           
+       ;;raku             
+       rest
+       ;;rst              
+       ;;(ruby +rails)    
+       (rust +lsp)
+       ;;scala            
+       ;;(scheme +guile)  
+       (sh +lsp)
+       ;;sml
+       ;;solidity         
+       ;;swift            
+       ;;terra            
+       (web +lsp)
+       (yaml +lsp)
+       ;;zig
 
        :email
        ;;(mu4e +org +gmail)
@@ -110,10 +191,10 @@
        :app
        ;;calendar
        ;;emms
-       ;;everywhere        ; *leave* Emacs!? You must be joking
-       ;;irc               ; how neckbeards socialize
-       ;;(rss +org)        ; emacs as an RSS reader
-       ;;twitter           ; twitter client https://twitter.com/vnought
+       ;;everywhere       
+       ;;irc              
+       ;;(rss +org)       
+       ;;twitter
 
        :config
        ;;literate

@@ -40,8 +40,6 @@
     template = ~/.gittemplates/commit
 [github]
     user = guiparpinelli
-[flake8]
-    strict = true
 [interactive]
     diffFilter = delta --color-only
 [delta]
