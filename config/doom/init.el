@@ -28,7 +28,7 @@
        (vertico +childframe)
 
        :ui
-       ;;deft
+       deft
        doom
        doom-dashboard
        doom-quit
@@ -153,7 +153,7 @@
        ;;nim
        ;;nix
        ;;ocaml
-       (org +pretty)
+       (org +hugo +journal +pretty)
        ;;php
        ;;plantuml
        ;;purescript

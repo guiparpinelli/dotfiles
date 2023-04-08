@@ -33,9 +33,9 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Guilherme Parpinelli"
-  user-mail-address "guilheerme.p@gmail.com"
-  default-directory "~/"
-  command-line-default-directory "~/")
+      user-mail-address "guilheerme.p@gmail.com"
+      default-directory "~/"
+      command-line-default-directory "~/")
 
 ;; Start Emacs fullscreen
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -47,9 +47,9 @@
 
 ;;
 ;;; ui
-(setq doom-theme 'doom-dracula
-  doom-font (font-spec :family "JetBrains Mono" :size 14)
-  display-line-numbers-type 'relative)
+(setq doom-theme 'doom-one
+      doom-font (font-spec :family "JetBrains Mono" :size 14)
+      display-line-numbers-type 'relative)
 
 ;;; :ui doom-dashboard
 (setq fancy-splash-image (concat doom-user-dir "splash.png"))
@@ -79,7 +79,7 @@
 ;;; :editor evil
 ;; Focus new window after splitting
 (setq evil-split-window-below t
-  evil-vsplit-window-right t)
+      evil-vsplit-window-right t)
 
 ;; Implicit /g flag on evil ex substitution, because I use the default behavior
 ;; less often.
@@ -89,22 +89,26 @@
 ;; Disable invasive lsp-mode features
 (after! lsp-mode
   (setq lsp-enable-symbol-highlighting nil
-    ;; If an LSP server isn't present when I start a prog-mode buffer, you
-    ;; don't need to tell me. I know. On some machines I don't care to have
-    ;; a whole development environment for some ecosystems.
-    lsp-enable-suggest-server-download nil))
+        ;; If an LSP server isn't present when I start a prog-mode buffer, you
+        ;; don't need to tell me. I know. On some machines I don't care to have
+        ;; a whole development environment for some ecosystems.
+        lsp-enable-suggest-server-download nil))
 (after! lsp-ui
   (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
-    lsp-ui-doc-enable nil))     ; redundant with K
+        lsp-ui-doc-enable nil))     ; redundant with K
+
+(after! (:or lsp-mode lsp)
+  :config
+  (setq lsp-response-timeout 90000))
 
 ;;; :tools magit
 (setq magit-repository-directories '(("~/workspace" . 1) ("~/go/src" . 2))
-  magit-save-repository-buffers nil
-  ;; Don't restore the wconf after quitting magit, it's jarring
-  magit-inhibit-save-previous-winconf t
-  transient-values '((magit-rebase "--autosquash" "--autostash")
-                      (magit-pull "--rebase" "--autostash")
-                      (magit-revert "--autostash")))
+      magit-save-repository-buffers nil
+      ;; Don't restore the wconf after quitting magit, it's jarring
+      magit-inhibit-save-previous-winconf t
+      transient-values '((magit-rebase "--autosquash" "--autostash")
+                         (magit-pull "--rebase" "--autostash")
+                         (magit-revert "--autostash")))
 
 (after! projectile
   :config
@@ -115,3 +119,59 @@
   :config
   (setq poetry-tracking-strategy 'projectile)
   (remove-hook! 'python-mode-hook #'poetry-tracking-mode))
+
+(setq-hook! 'cc-mode +format-with :none)
+
+(use-package! prettier
+  :defer t
+  :after web-mode
+  :hook ((typescript-tsx-mode . prettier-mode)
+         (typescript-mode . prettier-mode)
+         (js-mode . prettier-mode)
+         (json-mode . prettier-mode)
+         (css-mode . prettier-mode)
+         (scss-mode . prettier-mode)
+         (html-mode . prettier-mode))
+  :config
+  (add-hook 'before-save-hook 'prettier-prettify))
+
+(after! deft
+  :defer t
+  :config
+  (setq deft-directory "~/workspace/org"
+        deft-extensions '("org" "md" "txt")
+        deft-default-extension "org"
+        deft-recursive t
+        deft-use-filename-as-title nil
+        deft-use-filter-string-for-filename t
+        deft-file-naming-rules '((nospace . "-"))))
+
+(after! org
+  :config
+  (setq org-log-done 'time
+        org-clock-persist 'history
+        org-directory "~/workspace/org"
+        org-archive-location "archives/%s_archive::"
+        org-capture-template-dir (concat doom-user-dir "org-captures/")
+        org-capture-templates
+        `(
+          ("c" "Code" entry (file "~/workspace/org/code.org")
+           (file ,(concat org-capture-template-dir "code-snippet.capture")))
+          ("j" "Journal" entry (file+datetree "~/workspace/org/journal.org")
+           (file ,(concat org-capture-template-dir "journal.capture")))
+          ("b" "Blog post" entry (file+olp "~/workspace/org/blog.org" "Posts")
+           (file ,(concat org-capture-template-dir "blog-post.capture")))
+          ("n" "Note" entry (file+olp "~/workspace/org/notes.org" "Inbox")
+           "* %?\nEntered on %U\n  %i\n  %a")
+          ("t" "Todo" entry (file "~/workspace/org/todos.org")
+           "* TODO %?\n %i\n  %a")
+          ("w" "Weekly journal" entry (file+olp+datetree "~/workspace/org/journal/weekly.org" "Weekly notes")
+           (file ,(concat org-capture-template-dir "weekly-journal.capture")) :tree-type week))))
+
+(after! (org-journal org)
+  :defer t
+  :config
+  (setq org-journal-dir "~/workspace/org/journal")
+  (push org-journal-dir org-agenda-files)
+  (setq org-journal-enable-agenda-integration t)
+  (setq org-journal-file-format "%Y%m%d.org"))
