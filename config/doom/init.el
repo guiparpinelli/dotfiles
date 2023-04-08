@@ -96,7 +96,7 @@
        gist
        lookup
        (lsp)
-       (magit +forge)
+       magit
        make
        ;;pass
        pdf
@@ -115,7 +115,7 @@
        :lang
        ;;agda
        ;;beancount
-       (cc +tree-sitter +lsp)
+       (cc +lsp)
        ;;clojure
        ;;common-lisp
        ;;coq
@@ -135,12 +135,12 @@
        ;;fsharp
        ;;fstar
        ;;gdscript
-       (go +tree-sitter +lsp)
+       (go +lsp)
        ;;(graphql +lsp)
        ;;(haskell +lsp)
        ;;hy
        ;;idris
-       (json +tree-sitter +lsp)
+       json
        ;;(java +lsp)
        (javascript +tree-sitter +lsp)
        ;;julia
@@ -158,27 +158,27 @@
        ;;plantuml
        ;;purescript
        (python
+        +tree-sitter
         +pyenv
         +lsp
         +pyright
-        +poetry
-        +tree-sitter)
+        +poetry)
        ;;qt
        ;;racket
        ;;raku
        rest
        ;;rst
        ;;(ruby +rails)
-       (rust +tree-sitter +lsp)
+       (rust +lsp)
        ;;scala
        ;;(scheme +guile)
-       (sh +tree-sitter +lsp)
+       (sh +lsp)
        ;;sml
        ;;solidity
        ;;swift
        ;;terra
        (web +tree-sitter +lsp)
-       (yaml +tree-sitter +lsp)
+       (yaml +lsp)
        ;;zig
 
        :email
