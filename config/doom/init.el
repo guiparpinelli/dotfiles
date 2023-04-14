@@ -148,7 +148,7 @@
        ;;latex
        ;;lean
        ;;ledger
-       lua
+       (lua +tree-sitter +lsp)
        markdown
        ;;nim
        ;;nix

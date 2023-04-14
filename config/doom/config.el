@@ -120,8 +120,6 @@
   (setq poetry-tracking-strategy 'projectile)
   (remove-hook! 'python-mode-hook #'poetry-tracking-mode))
 
-(setq-hook! 'cc-mode +format-with :none)
-
 (use-package! prettier
   :defer t
   :after web-mode
