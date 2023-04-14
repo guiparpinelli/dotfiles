@@ -1,5 +1,7 @@
 {
+  "42header": { "branch": "master", "commit": "71e6a4df6d72ae87a080282bf45bb993da6146b2" },
   "Comment.nvim": { "branch": "master", "commit": "a89339ffbee677ab0521a483b6dac7e2e67c907e" },
+  "c_formatter_42.vim": { "branch": "master", "commit": "60eaf6e1b1c874c0dbe33f30d9aeab2f0c8361c2" },
   "indent-blankline.nvim": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
   "lazy.nvim": { "branch": "main", "commit": "57cce98dfdb2f2dd05a0567d89811e6d0505e13b" },
   "neovim": { "branch": "main", "commit": "3935606b6c1cd0111359142498a9b02d3a12e1f1" },
