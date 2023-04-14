@@ -23,6 +23,11 @@ export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 export EDITOR="vim"                     # $EDITOR use Vim in terminal
 export VISUAL="emacsclient -c -a emacs" # $VISUAL use Emacs in GUI mode
 
+# Neovim
+if command -v nvim > /dev/null 2>&1; then
+    alias vim="nvim"
+fi
+
 # Emacs
 alias em="/opt/homebrew/bin/emacs -nw"
 alias emacs="emacsclient -c -a 'emacs'"
