@@ -23,3 +23,4 @@ vim.keymap.set('n', '<leader>pf', builtin.git_files, { desc = 'Find project file
 vim.keymap.set('n', '<leader>ps', builtin.live_grep, { desc = 'Search by grep' })
 
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search help' })
+vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search diagnostics' })
