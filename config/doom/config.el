@@ -149,6 +149,7 @@
   (setq org-log-done 'time
         org-clock-persist 'history
         org-directory "~/workspace/org"
+        org-agenda-files (list org-directory)
         org-archive-location "archives/%s_archive::"
         org-capture-template-dir (concat doom-user-dir "org-captures/")
         org-capture-templates
