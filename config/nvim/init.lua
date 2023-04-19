@@ -55,6 +55,8 @@ require('lazy').setup({
   'cacharle/c_formatter_42.vim',
   '42Paris/42header',
 
+  'TimUntersberger/neogit',
+
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
