@@ -1,10 +1,8 @@
 pip
-black
 pyright
-pyflakes
-pylint
 organize-tool
 ipython
 ipdb
-isort
 pytest
+ruff
+ruff-lsp
