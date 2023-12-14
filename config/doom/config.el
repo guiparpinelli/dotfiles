@@ -1,35 +1,3 @@
-;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
-;;
-;;   (after! PACKAGE
-;;     (setq x y))
-;;
-;; The exceptions to this rule:
-;;
-;;   - Setting file/directory variables (like `org-directory')
-;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
-;;   - Setting doom variables (which start with 'doom-' or '+').
-;;
-;; Here are some additional functions/macros that will help you configure Doom.
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
-;; etc).
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Guilherme Parpinelli"
@@ -43,7 +11,7 @@
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 ;; Background opacity
-(set-frame-parameter (selected-frame) 'alpha 85)
+(set-frame-parameter (selected-frame) 'alpha 90)
 
 ;;
 ;;; ui
@@ -102,7 +70,7 @@
   (setq lsp-response-timeout 90000))
 
 ;;; :tools magit
-(setq magit-repository-directories '(("~/workspace" . 1) ("~/go/src" . 2))
+(setq magit-repository-directories '(("~/workspace" . 1))
       magit-save-repository-buffers nil
       ;; Don't restore the wconf after quitting magit, it's jarring
       magit-inhibit-save-previous-winconf t
@@ -112,65 +80,10 @@
 
 (after! projectile
   :config
-  (setq projectile-project-search-path '("~/workspace" "~/go/src")))
+  (setq projectile-project-search-path '("~/workspace")))
 
 (after! poetry
   :defer t
   :config
   (setq poetry-tracking-strategy 'projectile)
   (remove-hook! 'python-mode-hook #'poetry-tracking-mode))
-
-(use-package! prettier
-  :defer t
-  :after web-mode
-  :hook ((typescript-tsx-mode . prettier-mode)
-         (typescript-mode . prettier-mode)
-         (js-mode . prettier-mode)
-         (json-mode . prettier-mode)
-         (css-mode . prettier-mode)
-         (scss-mode . prettier-mode)
-         (html-mode . prettier-mode))
-  :config
-  (add-hook 'before-save-hook 'prettier-prettify))
-
-(after! deft
-  :defer t
-  :config
-  (setq deft-directory "~/workspace/org"
-        deft-extensions '("org" "md" "txt")
-        deft-default-extension "org"
-        deft-recursive t
-        deft-use-filename-as-title nil
-        deft-use-filter-string-for-filename t
-        deft-file-naming-rules '((nospace . "-"))))
-
-(after! org
-  :config
-  (setq org-log-done 'time
-        org-clock-persist 'history
-        org-directory "~/workspace/org"
-        org-agenda-files (list org-directory)
-        org-archive-location "archives/%s_archive::"
-        org-capture-template-dir (concat doom-user-dir "org-captures/")
-        org-capture-templates
-        `(
-          ("c" "Code" entry (file "~/workspace/org/code.org")
-           (file ,(concat org-capture-template-dir "code-snippet.capture")))
-          ("j" "Journal" entry (file+datetree "~/workspace/org/journal.org")
-           (file ,(concat org-capture-template-dir "journal.capture")))
-          ("b" "Blog post" entry (file+olp "~/workspace/org/blog.org" "Posts")
-           (file ,(concat org-capture-template-dir "blog-post.capture")))
-          ("n" "Note" entry (file+olp "~/workspace/org/notes.org" "Inbox")
-           "* %?\nEntered on %U\n  %i\n  %a")
-          ("t" "Todo" entry (file "~/workspace/org/todos.org")
-           "* TODO %?\n %i\n  %a")
-          ("w" "Weekly journal" entry (file+olp+datetree "~/workspace/org/journal/weekly.org" "Weekly notes")
-           (file ,(concat org-capture-template-dir "weekly-journal.capture")) :tree-type week))))
-
-(after! (org-journal org)
-  :defer t
-  :config
-  (setq org-journal-dir "~/workspace/org/journal")
-  (push org-journal-dir org-agenda-files)
-  (setq org-journal-enable-agenda-integration t)
-  (setq org-journal-file-format "%Y%m%d.org"))
