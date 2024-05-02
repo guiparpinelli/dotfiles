@@ -81,3 +81,21 @@
 (after! projectile
   :config
   (setq projectile-project-search-path '("~/workspace")))
+
+;; configure ruff
+(add-hook 'python-mode-hook #'flymake-ruff-load)
+(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+
+;; python debug mode
+(use-package! dap-mode
+  :after lsp-mode
+  :commands dap-debug
+  :hook ((python-mode . dap-ui-mode) (python-mode . dap-mode))
+  :config
+  (require 'dap-python)
+  (setq dap-python-debugger 'debugpy)
+  (defun dap-python--pyenv-executable-find (command)
+    (with-venv (executable-find "python")))
+
+  (add-hook 'dap-stopped-hook
+            (lambda (arg) (call-interactively #'dap-hydra))))
