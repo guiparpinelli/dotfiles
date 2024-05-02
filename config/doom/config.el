@@ -15,7 +15,7 @@
 
 ;;
 ;;; ui
-(setq doom-theme 'doom-one
+(setq doom-theme 'doom-rose-pine
       doom-font (font-spec :family "JetBrains Mono" :size 14)
       display-line-numbers-type 'relative)
 
@@ -81,9 +81,3 @@
 (after! projectile
   :config
   (setq projectile-project-search-path '("~/workspace")))
-
-(after! poetry
-  :defer t
-  :config
-  (setq poetry-tracking-strategy 'projectile)
-  (remove-hook! 'python-mode-hook #'poetry-tracking-mode))

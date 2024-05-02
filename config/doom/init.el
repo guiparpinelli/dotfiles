@@ -109,15 +109,14 @@
        (python
         +tree-sitter
         +lsp
-        +pyright
-        +poetry)
+        +pyright)
        ;;qt
        ;;racket
        ;;raku
-       ;;rest
+       rest
        ;;rst
        ;;(ruby +rails)
-       ;;(rust +lsp)
+       (rust +lsp)
        ;;scala
        ;;(scheme +guile)
        sh
@@ -125,7 +124,7 @@
        ;;solidity
        ;;swift
        ;;terra
-       ;;(web +tree-sitter +lsp)
+       (web +tree-sitter +lsp)
        (yaml +lsp)
        ;;zig
 
