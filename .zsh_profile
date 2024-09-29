@@ -1,6 +1,5 @@
 unset path
 PATH="\
-$HOME/.pyenv/bin:\
 $HOME/.cargo/bin:\
 $HOME/.config/emacs/bin:\
 $HOME/.local/bin:"
@@ -73,9 +72,6 @@ alias ..="cd .."
 alias ...="cd ../../"
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 weather() {
         curl "https://wttr.in/${1}"
