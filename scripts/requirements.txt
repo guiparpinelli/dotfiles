@@ -1,8 +1,6 @@
 pip
-pyright
-organize-tool
-ipython
+debugpy
 ipdb
-pytest
+ipython
 ruff
 ruff-lsp
