@@ -1,2 +1,1 @@
-(package! flymake-ruff)
-(package! ruff-format)
+(package! yasnippet-snippets)

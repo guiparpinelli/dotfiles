@@ -1,26 +1,26 @@
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Guilherme Parpinelli"
-      user-mail-address "guilheerme.p@gmail.com"
-      default-directory "~/"
-      command-line-default-directory "~/")
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Start Emacs fullscreen
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-;; Prevents some cases of Emacs flickering.
-(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
-
-;; Background opacity
-(set-frame-parameter (selected-frame) 'alpha 90)
+;; (setq auth-sources '("~/.authinfo" "~/.authinfo.gpg" "~/.netrc"))
+;; (setq-default enable-local-variables t)
 
 ;;
 ;;; ui
 (setq doom-theme 'doom-rose-pine
-      doom-font (font-spec :family "JetBrains Mono" :size 14)
-      display-line-numbers-type 'relative)
+      display-line-numbers-type 'relative
+      default-directory "~/"
+      command-line-default-directory "~/")
 
-;;; :ui doom-dashboard
-(setq fancy-splash-image (concat doom-user-dir "splash.png"))
+(display-time-mode 1)
+(display-battery-mode 1)
+;; Start Emacs fullscreen (FIXME)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; Prevents some cases of Emacs flickering
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+;; Remove title bar
+(add-to-list 'default-frame-alist '(undecorated . t))
+;; Background opacity
+(set-frame-parameter (selected-frame) 'alpha 90)
+
 
 ;;; :ui modeline
 (after! doom-modeline
@@ -40,6 +40,56 @@
 
   ;; Don’t compact font caches during GC.
   (setq inhibit-compacting-font-caches t))
+
+(after! org
+  :config
+  (setq org-directory "~/notes/org")
+  (setq
+   org-log-done 'time
+   org-clock-persist 'history
+   org-archive-location ".archives/%s_archive::"
+   org-agenda-files (list org-directory)
+   org-log-into-drawer t
+   org-agenda-inhibit-startup t
+   org-capture-template-dir (concat doom-user-dir "org-captures/")
+   org-capture-templates
+   `(
+     ("t" "Todo" entry (file ,(concat org-directory "/todos.org"))
+      "* TODO %?\n %i\n  %a")
+     ("c" "Code" entry (file ,(concat org-directory "/code.org"))
+      (file ,(concat org-capture-template-dir "code-snippet.capture")))
+     ("b" "Blog post" entry (file+olp ,(concat org-directory "/blog.org") "Posts")
+      (file ,(concat org-capture-template-dir "blog-post.capture")))
+     ("d" "Decision record" entry (file ,(concat org-directory "/decisions.org"))
+      (file ,(concat org-capture-template-dir "decision.capture")))
+     ("r" "RPD" entry (file ,(concat org-directory "/rpd.org"))
+      (file ,(concat org-capture-template-dir "rpd.capture")))))
+  (setq-default org-catch-invisible-edits 'smart))
+
+(after! (org-journal org)
+  :defer t
+  :config
+  (setq org-journal-dir "~/notes/org/journal")
+  (push org-journal-dir org-agenda-files)
+  (setq org-journal-enable-agenda-integration t)
+  (setq org-journal-encrypt-journal t)
+  (setq org-journal-file-format "%Y%m%d.org"))
+
+(after! deft
+  :defer t
+  :config
+  (setq deft-directory "~/notes/org"
+        deft-extensions '("org" "md" "txt")
+        deft-default-extension "org"
+        deft-recursive t
+        deft-use-filename-as-title nil
+        deft-use-filter-string-for-filename t
+        deft-file-naming-rules '((nospace . "-"))))
+
+(after! doom-modeline
+  :config
+  (setq doom-modeline-continuous-word-count-modes
+        '(markdown-mode gfm-mod)))
 
 ;;
 ;;; Modules
@@ -82,20 +132,13 @@
   :config
   (setq projectile-project-search-path '("~/workspace")))
 
-;; configure ruff
-(add-hook 'python-mode-hook #'flymake-ruff-load)
-(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+;;; :lang python
+;; Check usage in ~/.config/emacs/modules/tools/debugger/README.org
+(after! dap-mode
+  (setq dap-python-debugger 'debugpy))
 
-;; python debug mode
-(use-package! dap-mode
-  :after lsp-mode
-  :commands dap-debug
-  :hook ((python-mode . dap-ui-mode) (python-mode . dap-mode))
+(after! apheleia
+  :defer t
   :config
-  (require 'dap-python)
-  (setq dap-python-debugger 'debugpy)
-  (defun dap-python--pyenv-executable-find (command)
-    (with-venv (executable-find "python")))
-
-  (add-hook 'dap-stopped-hook
-            (lambda (arg) (call-interactively #'dap-hydra))))
+  ;; make ruff the priority
+  (add-to-list 'apheleia-mode-alist '(python-mode . ruff)))
