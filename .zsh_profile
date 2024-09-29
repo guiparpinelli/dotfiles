@@ -33,12 +33,12 @@ alias em="/opt/homebrew/bin/emacs -nw"
 alias emacs="emacsclient -c -a 'emacs'"
 alias killemacs="emacsclient -e '(kill-emacs)' && brew services restart d12frosted/emacs-plus/emacs-plus@28"
 
-# Changing "ls" to "exa"
-alias la='exa -al --color=always --group-directories-first' # my preferred listing
-alias ls='exa -a --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -l --color=always'                            # long format
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
-alias l.='exa -a | egrep "^\."'
+# Changing "ls" to "eza"
+alias la='eza -al --color=always --group-directories-first' # my preferred listing
+alias ls='eza -a --color=always --group-directories-first'  # all files and dirs
+alias ll='eza -l --color=always'                            # long format
+alias lt='eza -aT --color=always --group-directories-first' # tree listing
+alias l.='eza -a | egrep "^\."'
 
 # Confirm before overwriting something
 alias cp="cp -i"
