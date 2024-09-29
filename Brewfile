@@ -9,8 +9,8 @@ brew "cookiecutter"
 brew "coreutils", link: true
 brew "ctags"
 brew "curl"
-brew "d12frosted/emacs-plus/emacs-plus@28", args: ["with-no-frame-refocus", "with-native-comp"], link: true
-brew "exa"
+brew "d12frosted/emacs-plus/emacs-plus@29", args: ["with-no-frame-refocus", "with-native-comp"], link: true
+brew "eza"
 brew "fd"
 brew "gawk"
 brew "gcc"
@@ -38,7 +38,6 @@ brew "tree"
 brew "wget"
 brew "zlib"
 
-cask "alacritty"
 cask "discord"
 cask "docker"
 cask "firefox"
